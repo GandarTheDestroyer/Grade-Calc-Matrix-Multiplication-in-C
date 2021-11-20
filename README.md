@@ -1,4 +1,4 @@
-# Team-Blue-Asteroids
+# Project by Fritz
 Grading students is a fundamental aspect in the workload of professors and 
 teachers. It is a straightforward calculation that only involves the student’s grades per 
 assessment and the subject’s grading system. In this regard, such job is relatively easy 
