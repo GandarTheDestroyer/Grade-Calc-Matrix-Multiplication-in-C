@@ -1,0 +1,134 @@
+
+#include <stdio.h>
+
+int main()
+{
+    /*This program will calculate the final grades of students given their grades per assessment component*/
+    /*It will use the principle of matrix multiplication to solve the students' final grades*/
+    
+    /*Input and output arrays declaration*/
+    float Scores[20][20], GradingSystem[20][20], FinalGrade[20][20];                        
+    
+    /*Loop variables and variables declaration to store no. of rows & column*/
+    int Scores_row, Scores_column, GradingSystem_column, i, j, k;        
+
+    /*Number of students to be graded*/
+    printf("Enter the Number of Students: ");                                               
+    scanf("%d", &Scores_row);
+
+    /*Number of assessments such as Exams, Projects, Assignments, etc.*/
+    printf("Enter the Number of Assessments: ");                                            
+    scanf("%d", &Scores_column);
+
+    /*Number of grading system variation*/
+    printf("Enter the Number of Grading System Variation: ");                                
+    scanf("%d", &GradingSystem_column);
+
+    /*Check if number of students, assessments, and grading variation are too small or too big (based on arrays)*/
+    if (Scores_row<1 || Scores_row>20){                                                     
+        printf("\nError! Invalid number of students. Try again.");
+        return 0;
+    }
+    else if (Scores_column<1 || Scores_column>20){                                          
+        printf("\nError! Invalid number of assessments. Try again.");
+        return 0;
+    }
+    else if (GradingSystem_column<1 || GradingSystem_column>20){
+        printf("\nError! Invalid number of grading system variation. Try again");
+        return 0;
+    }                                                      
+
+    /*Input scores data of the students in every assessment*/
+    printf("\nEnter the Average of Students' Scores per Assessment.\n");
+    for (i=0; i<Scores_row; i++){
+        for (j=0; j<Scores_column; j++){
+            printf("Student %d, Assessment %d Grade: ", i+1, j+1);
+            scanf("%f", &Scores[i][j]);
+
+            if (Scores[i][j]<1 || Scores[i][j]>100){
+                printf("\nError! Invalid Grade. Try again");
+                return 0;
+            }
+        }
+        printf("\n");
+    }
+
+    /*Input the grading system for the variation and must total to 100%*/
+    /*Example: Exam = 0.60, Assignments = 0.20, Summative Test = 0.20*/
+    printf("\nEnter the Grading System per Assessment.\n");
+    for(i=0; i<Scores_column; i++){
+        for(j=0; j<GradingSystem_column; j++){
+            printf("Grading System %d, Weight of Assessment %d: ", j+1, i+1);
+            scanf("%f", &GradingSystem[i][j]);
+
+            if (GradingSystem[i][j]<0.01 || GradingSystem[i][j]>1.0){
+                printf("\nError! Invalid Grading System. Try Again.");
+                return 0;
+            }
+        }
+    }
+
+    /*Calculation of the final grades of the students using Matrix multiplication*/
+    for(i=0; i<Scores_row; i++){
+        for(j=0; j<GradingSystem_column; j++){
+            FinalGrade[i][j] = 0;
+            for(k=0; k<Scores_column; k++){
+                FinalGrade[i][j] += Scores[i][k] * GradingSystem[k][j]; 
+            }
+        }
+    }
+
+    /*Display the scores of students in every assessment*/
+    printf("\n____________________________________________________________\n");
+    printf("\t SCORES PER ASSESSMENT\n");
+    printf("____________________________________________________________\n");
+
+    printf("\t\t");
+    for(j=0; j<Scores_column; j++){
+        printf("A%d\t", j+1);
+    }
+    for(i=0; i<Scores_row; i++){
+        printf("\nStudent %d: \t", i+1);
+        for(j=0; j<Scores_column; j++){
+            printf("%.2f\t", Scores[i][j]);
+        }
+
+        printf("\n");                                                                    
+    }
+
+    printf("____________________________________________________________");
+    printf("\n");
+
+    /*Display the Grading System*/
+    printf("\n______________________________________");
+    printf("\n  GRADING SYSTEM\n");
+    printf("______________________________________\n");
+
+    for(i=0; i<Scores_column; i++){
+        for(j=0; j<GradingSystem_column; j++){
+            printf("\nAssessment %d (Variation %d): %.2f\t", i+1, j+1, GradingSystem[i][j]);
+        }
+
+        printf("\n");                                                                   
+    }
+    printf("______________________________________");
+    printf("\n");
+
+    /*Display final grades of Students*/
+    printf("\n____________________________________________________");
+    printf("\n\t  FINAL GRADES\n");
+    printf("____________________________________________________\n");
+
+    for(i=0; i<Scores_row; i++){
+        for(j=0; j<GradingSystem_column; j++){
+            printf("\nStudent %d (Variation %d): \t%.2f", i+1, j+1, FinalGrade[i][j]);
+        }
+
+        printf("\n");                                                                   
+    }
+    printf("____________________________________________________");
+
+    return 0;
+}
+CRequirement.c
+Displaying CRequirement.c.
